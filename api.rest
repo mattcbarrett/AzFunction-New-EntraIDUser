@@ -1,0 +1,9 @@
+# Sample to test the function with once running in Azure
+POST https://your-url.azurewebsites.net/api/HttpTrigger1?code=
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "User",
+  "officeLocation": "Seattle"
+}
