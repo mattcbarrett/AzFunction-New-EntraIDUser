@@ -33,13 +33,13 @@ function New-EntraIDUser {
     [string]$country
   )
 
-  [string]$emailDomain = '' # Add your email domain here. Omit the @.
+  [string]$emailDomain = '' # Add your email domain here. Omit the @ symbol.
   [string]$displayName = $firstName + ' ' + $lastName
   [string]$mailNickname = $firstname.ToLower() + '.' + $lastName.ToLower()
   [string]$emailAddress = $mailNickname + '@' + $emailDomain
 
   if ($emailDomain -eq '') {
-    return "The emailDomain variable is blank! Edit New-EntraIDUser.ps1 and populate it on line 36."
+    return "The emailDomain variable is blank! Edit HttpTrigger1\scripts\New-EntraIDUser.ps1 and populate it on line 36."
   }
 
   $password = New-Passphrase
