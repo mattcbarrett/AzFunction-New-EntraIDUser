@@ -31,7 +31,7 @@ Retrieve the system-assigned identity's service principal
 az webapp identity show --name name_of_function_app --resource-group azfunc-new-entraiduser
 ```
 
-Assign MS Graph permissions to the managed identity (service principal). Populate $managedIdentitySPN with the "default" key from the last step and paste the below code into a terminal window.
+Assign MS Graph permissions to the managed identity (service principal). Populate $managedIdentitySPN with the "default" key from the last step and paste the code below into a terminal window.
 ```
 Connect-AzAccount
 $managedIdentitySPN = ''
@@ -42,6 +42,7 @@ $msGraphSPN = Get-AzADServicePrincipal -Filter "appId eq '$msGraphAppId'"
 $appRoles = $msGraphSPN.AppRole | Where-Object {$_.Value -in $msGraphPermissions -and $_.AllowedMemberType -contains 'Application'}
 $appRoles | % { New-AzADServicePrincipalAppRoleAssignment -ServicePrincipalId $managedIdentitySPN -ResourceId $msGraphSPN.Id -AppRoleId $_.Id }
 ```
+This can take an hour to apply.
 
 # Usage
 Get the app's function key
@@ -59,14 +60,15 @@ Build the URL: https://hostname/api/HttpTrigger1?code=function_key
 Trigger the function by sending a POST request to the url with a JSON payload.
 
 Minimum required attributes:
-
+```
 {
   "firstName": "Test",
   "lastName": "User"
 }
+```
 
 All available attributes:
-
+```
 {
   "firstName": "Test",
   "lastName": "User",
@@ -81,3 +83,4 @@ All available attributes:
   "zipCode": "98101",
   "country": "United States"
 }
+```
