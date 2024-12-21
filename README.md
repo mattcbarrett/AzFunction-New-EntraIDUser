@@ -8,8 +8,8 @@ Populate the $emailDomain variable in HttpTrigger1\scripts\New-EntraIDUser.ps1
 
 Create a resource group and services in azure
 ```
-az group create --name azfunc-new-entraiduser --location westus2
-az deployment group create --resource-group azfunc-new-entraiduser --template-file .\bicep\main.bicep
+az group create --name resource_group_name --location westus2
+az deployment group create --resource-group resource_group_name --template-file .\bicep\main.bicep
 ```
 
 Zip the project for deployment
@@ -19,7 +19,7 @@ Compress-Archive -Path .\requirements.psd1, .\profile.ps1, .\host.json, .\HttpTr
 
 Deploy it
 ```
-az functionapp deployment source config-zip -g azfunc-new-entraiduser -n name_of_function_app --src project.zip
+az functionapp deployment source config-zip -g resource_group_name -n name_of_function_app --src project.zip
 ```
 
 
@@ -28,7 +28,7 @@ Install Azure CLI: [here](https://learn.microsoft.com/en-us/cli/azure/)
 
 Retrieve the system-assigned identity's service principal
 ```
-az webapp identity show --name name_of_function_app --resource-group azfunc-new-entraiduser
+az webapp identity show --name name_of_function_app --resource-group resource_group_name
 ```
 
 Assign MS Graph permissions to the managed identity (service principal). Populate $managedIdentitySPN with the "default" key from the last step and paste the code below into a terminal window.
@@ -47,12 +47,12 @@ This can take an hour to apply.
 # Usage
 Get the app's function key
 ```
-az functionapp keys list --name name_of_function_app --resource-group azfunction-new-entraiduser
+az functionapp keys list --name name_of_function_app --resource-group resource_group_name
 ```
 
 Get the app's hostname
 ```
-az functionapp config hostname list --webapp-name name_of_function_app --resource-group azfunction-new-entraiduser
+az functionapp config hostname list --webapp-name name_of_function_app --resource-group resource_group_name
 ```
 
 Build the URL: https://hostname/api/HttpTrigger1?code=function_key
