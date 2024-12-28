@@ -23,7 +23,7 @@ az functionapp deployment source config-zip -g resource_group_name -n name_of_fu
 ```
 
 
-# Give the function's managed identity permissions within MS Graph
+# Give the function permission to create users in MS Graph
 Install Azure CLI: [here](https://learn.microsoft.com/en-us/cli/azure/)
 
 Retrieve the system-assigned identity's service principal
