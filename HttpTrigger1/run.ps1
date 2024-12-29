@@ -35,7 +35,7 @@ try {
     Write-Host "Successfully created account" $user.Username
 
     Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-            StatusCode = [HttpStatusCode]::OK
+            StatusCode = [HttpStatusCode]::Created
             Body       = $user
         })
 }
